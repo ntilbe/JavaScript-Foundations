@@ -7,9 +7,9 @@
 let principle = 200000;
 let interestRate = 0.05;
 let years = 30;
-const name = "Nicole";
+let name = "Nicole";
 
-
+console.log(principle, interestRate, years, name);
 
 // 🏡 Task 1.5: Simple Math
 /* To create a monthly mortgage rate calculator, we need to know the number of years in months and the monthly interest rate. 
@@ -17,9 +17,11 @@ const name = "Nicole";
 (1) Create a variable called `monthlyInterestRate` and give it the value of interest rate divided by 12. 
 (2) Create another variable called `periods` and give it the value of years*12.
 */
+
 let monthlyInterestRate = interestRate / 12;
 let periods = years * 12;
-
+let m = monthlyInterestRate.toFixed(2);
+console.log(m, periods);
 
 // 🏡 Task 2: Harder Math
 /* Create your calculator! Use the formula in the ReadMe (also below) to run calculations on your numbers. Save the final value into a variable called monthlyRate. 
@@ -39,12 +41,20 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 When your math is correct, monthlyRate will equal 1073.64
 */
 
-let n1 = (1 + I )^N;
-let n2 = n1 * I;
-let numerator = n1 * n2;
-let denominator = n1 - 1;
-let monthlyRate = numerator/denominator;
-console.log(monthlyRate);
+// Numerator
+let numerator = monthlyInterestRate * Math.pow((1+monthlyInterestRate), periods); 
+let n = numerator.toFixed(2);
+console.log(n, 'this is top');
+
+// Denominator
+let denominator = Math.pow((1+monthlyInterestRate), periods) - 1; 
+let d = denominator.toFixed(2);
+console.log(d, 'this is bottom');
+
+// monthly rate calculation
+let monthlyRate = principle * (numerator / denominator); 
+let mr = monthlyRate.toFixed(2);
+console.log(mr);
 
 
 // 🏡 Task 3: Function
@@ -53,11 +63,26 @@ console.log(monthlyRate);
 If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly rate is 1073.64"
 */
 
-function mortgageCalculator(name, monthlyRate){
-    console.log("{Name}, your monthly rate is ${monthlyRate}");
-} 
-
-
+function mortgageCalculator(P, I, N) {
+         let principal = P;    
+         let interestRate = I;   
+         let years = N;  
+    
+         const name = "Nicole";
+    
+         let monthlyInterestRate = interestRate / 12; 
+         let periods = years * 12; 
+    
+         let top = monthlyInterestRate * Math.pow((1+monthlyInterestRate), periods); 
+         let bottom = Math.pow((1+monthlyInterestRate), periods) - 1; 
+         let monthlyRate = principal * (top / bottom); 
+    
+         console.log(name, ", your monthly rate is ", mr);
+    
+     }
+    
+     mortgageCalculator(200000, 0.05, 30); 
+    
 
 // 🏡 Task 4: Arguments and Parameters
 /* Substitute the variables in your functions for parameters such that you can substitute `P`, `I`, and `N` when you call the function.
